@@ -1,17 +1,29 @@
 
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import ButtonAppBar from './Components/Home';
+import NavigationBar from "./Components/NavigationBar"
 import SignIn from './Components/Login/SignIn';
-import SignUp from './Components/Login/Signup';
+import SignUp from './Components/Login/SignUp';
+import Home from './Components/Home';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getUser } from './JS/actions/authactions';
+
 
 function App() {
+  const dispatch= useDispatch()
+ useEffect(() => {
+   dispatch(getUser())
+ }, [])
+ 
+  
   return (
     <div className="App">
-      <ButtonAppBar/>
+      <NavigationBar />
      <Routes>
       <Route path="/signin" element={<SignIn/>}/>
       <Route path="/signup" element={<SignUp/>}/>
+      <Route path="/" element={<Home/>}/>
      </Routes>
     </div>
   );

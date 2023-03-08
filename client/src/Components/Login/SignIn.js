@@ -5,13 +5,16 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import {Link, useNavigate }from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Alert } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../JS/actions/authactions";
 
 function Copyright(props) {
   return (
@@ -33,14 +36,18 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignInSide() {
+export default function SignIn() {
+  const dispatch= useDispatch()
+  const navigate=useNavigate()
+  const alertMessage = useSelector(state => state.auth.Alert)
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const loginData={
       email: data.get("email"),
-      password: data.get("password"),
-    });
+      pasword: data.get("pasword"),
+    };
+    dispatch(login(loginData,navigate))
   };
 
   return (
@@ -73,12 +80,16 @@ export default function SignInSide() {
               alignItems: "center",
             }}
           >
+               {alertMessage?<Alert severity="success" color="info">
+            {alertMessage}, you can login to your account now
+          </Alert>:""}
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+         
             <Box
               component="form"
               noValidate
@@ -99,7 +110,7 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                name="pasword"
                 label="Password"
                 type="password"
                 id="password"
@@ -124,7 +135,7 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link to="/signup">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

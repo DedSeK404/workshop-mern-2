@@ -37,9 +37,9 @@ module.exports.loginuser = async (req, res) => {
     //3) token creation
     const payload= {userid: existeUser._id}
     const token = createtoken(payload)
-// existeUser.pasword=undefined
+existeUser.pasword=undefined
     //4) response
-    res.send({ token})
+    res.send({ token,msg:'user succsessfully logged in', user:existeUser})
 
   } catch (error) {
     res.status(500).send({ msg: error.message });
@@ -48,7 +48,7 @@ module.exports.loginuser = async (req, res) => {
 
 module.exports. getCurrentUser = (req, res)=>{
   try {
-    res.json({user:req.user, })
+    res.send({user:req.user, })
   } catch (error) {
     res.status(500).send({ msg: error.message });
   }
