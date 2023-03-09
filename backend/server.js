@@ -10,6 +10,8 @@ const connect = require("./config/DB");
 connect();
 
 app.use("/auth", require("./routes/authRoutes"));
+app.use("/product",require("./routes/productRoutes"))
+
 app.listen(Port, (error) =>
   error
     ? console.log(error.message)

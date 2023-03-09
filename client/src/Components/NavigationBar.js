@@ -79,6 +79,7 @@ function NavigationBar() {
             >
               <MenuIcon />
             </IconButton>
+            
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -105,6 +106,22 @@ function NavigationBar() {
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+
+
+{/* products */}
+<Link to='/products'>
+          <MenuItem  onClick={handleLogoutUser}>
+                      <Typography textAlign="center">Products</Typography>
+                    </MenuItem>
+                    </Link>
+
+                    <Link to='/add'>
+          <MenuItem   onClick={handleLogoutUser}>
+                      <Typography  textAlign="center">Add product</Typography>
+                    </MenuItem>
+                    </Link>
+
+
           <Typography
             variant="h5"
             noWrap
@@ -189,6 +206,10 @@ function NavigationBar() {
               </Menu>
             </Box>
           )}
+           
+                   
+               
+                
         </Toolbar>
       </Container>
     </AppBar>

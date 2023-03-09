@@ -31,6 +31,26 @@ module.exports.loginRules = [
     .withMessage("min 8 characters"),
 ];
 
+//product validators
+module.exports.AddProductRules = [
+  body("name")
+    .notEmpty()
+    .trim()
+    .withMessage("Please enter product name"),
+  body("price")
+    .notEmpty()
+    .trim()
+    .withMessage("Please enter product price"),
+  body("qtes")
+    .notEmpty()
+    .trim()
+    .withMessage("please enter how many items you have in stock"),
+  body("description")
+    .notEmpty()
+    .trim()
+    .withMessage("please enter a valid description of your product"),
+];
+
 module.exports.validator = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
