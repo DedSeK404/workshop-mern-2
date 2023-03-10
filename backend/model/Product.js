@@ -9,6 +9,7 @@ const productschema = new mongoose.Schema({
   color: [String],
   disponible: { type: Boolean, default: true },
   img: String,
+  user: { type: mongoose.Types.ObjectId, ref: "user" }
 });
 const product = mongoose.model("product", productschema);
 module.exports = product;

@@ -43,8 +43,8 @@ function NavigationBar() {
     dispatch(logout());
   };
   // const token = localStorage.getItem("token");
-  const isAuth=useSelector(state=>state.auth.isAuth)
-  const currentUser=useSelector(state=>state.auth.currentUser)
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  const currentUser = useSelector((state) => state.auth.currentUser);
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -65,7 +65,7 @@ function NavigationBar() {
               textDecoration: "none",
             }}
           >
-            {currentUser.firstName?currentUser.firstName:"LOGO"}
+            {currentUser.firstName ? currentUser.firstName : "LOGO"}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -79,7 +79,7 @@ function NavigationBar() {
             >
               <MenuIcon />
             </IconButton>
-            
+
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -98,29 +98,22 @@ function NavigationBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              {pages.map((page) =>
+                page == "Products" ? (
+                  <Link to="/products">
+                    <MenuItem onClick={handleLogoutUser}>
+                      <Typography textAlign="center">Products</Typography>
+                    </MenuItem>
+                  </Link>
+                ) : (
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                )
+              )}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-
-
-{/* products */}
-<Link to='/products'>
-          <MenuItem  onClick={handleLogoutUser}>
-                      <Typography textAlign="center">Products</Typography>
-                    </MenuItem>
-                    </Link>
-
-                    <Link to='/add'>
-          <MenuItem   onClick={handleLogoutUser}>
-                      <Typography  textAlign="center">Add product</Typography>
-                    </MenuItem>
-                    </Link>
-
 
           <Typography
             variant="h5"
@@ -138,18 +131,30 @@ function NavigationBar() {
               textDecoration: "none",
             }}
           >
-           {currentUser.firstName?currentUser.firstName:"LOGO"}
+            {currentUser.firstName ? currentUser.firstName : "LOGO"}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+            {pages.map((page) =>
+              page == "Products" ? (
+                <Link to="/products">
+                  <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    {page}
+                  </Button>
+                </Link>
+              ) : (
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              )
+            )}
           </Box>
           {!isAuth ? (
             <Box sx={{ flexGrow: 0, display: "flex" }}>
@@ -206,10 +211,6 @@ function NavigationBar() {
               </Menu>
             </Box>
           )}
-           
-                   
-               
-                
         </Toolbar>
       </Container>
     </AppBar>

@@ -5,6 +5,9 @@ var app = express();
 app.use(cors());
 app.use(express.json());
 require("dotenv").config({ path: "./config/.env" });
+
+//Reading the image
+app.use("/uploads", express.static(__dirname + "/uploads"));
 const Port = process.env.port || 9000;
 const connect = require("./config/DB");
 connect();

@@ -46,7 +46,11 @@ export const login = (user, navigate) => async (dispatch) => {
     if (data.msg) {
       alert(data.msg);
     }
-    navigate("/");
+    data.user.role == "admin"
+      ? navigate("/admin_dashboard")
+      : data.user.role == "seller"
+      ? navigate("/seller_dashboard")
+      : navigate("/client_dashboard");
   } catch (error) {
     dispatch({ type: AUTHFAILED, payload: error });
     console.log(error);
@@ -63,29 +67,28 @@ export const login = (user, navigate) => async (dispatch) => {
  *@description  utilisateur authentifié
  *@access private
  */
- export const getUser = () => async (dispatch) => {
-    dispatch({ type: LOADING });
-    const opts = {headers:{Authorization:`Bearer ${localStorage.getItem("token")}`}}
-   console.log(`Bearer ${localStorage.getItem("token")}`)
-    try {
-      const { data } = await axios.get(`${baseURl}/`, opts);
-      dispatch({ type: CURRENTUSERAUTH, payload: data.user });
-      if (data.msg) {
-        alert(data.msg);
-      }
-     
-    } catch (error) {
-      dispatch({ type: AUTHFAILED, payload: error });
-      console.log(error);
-     
-      if (error.response.data.msg) {
-        alert(error.response.data.msg);
-      }
-    }
+export const getUser = () => async (dispatch) => {
+  dispatch({ type: LOADING });
+  const opts = {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   };
+  console.log(`Bearer ${localStorage.getItem("token")}`);
+  try {
+    const { data } = await axios.get(`${baseURl}/`, opts);
+    dispatch({ type: CURRENTUSERAUTH, payload: data.user });
+    if (data.msg) {
+      alert(data.msg);
+    }
+  } catch (error) {
+    dispatch({ type: AUTHFAILED, payload: error });
+    console.log(error);
 
+    if (error.response.data.msg) {
+      alert(error.response.data.msg);
+    }
+  }
+};
 
-
-  export const logout = ()=>({
-    type:LOGOUT
-  })
+export const logout = () => ({
+  type: LOGOUT,
+});

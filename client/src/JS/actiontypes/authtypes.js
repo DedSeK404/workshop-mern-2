@@ -11,6 +11,3 @@ export const LOGOUT="LOGOUT"
 
 export const AUTHFAILED="AUTHFAILED"
 
-export const FAILED="FAILED"
-
-export const GETALLPRODCUTSSUCCESS = "GETALLPRODCUTSSUCCESS";
