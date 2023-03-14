@@ -7,14 +7,16 @@ module.exports.addProduct = async (req, res) => {
     const url = `${req.protocol}://${req.get("host")}`;
     console.log(url);
 
-    const existeprod = await productmodel.findOne({ name });
-    // console.log(existeprod)
-    if (existeprod) {
+    const existeprods = await productmodel.find({ user:req.user._id });
+  //  console.log(existeprods)
+const existingProduct = existeprods.find(el=>el.name==name)
+console.log(existingProduct)
+    if (existingProduct) {
       return res.status(400).send({ msg: "produit deja existe" });
     }
     const newproduct = new productmodel({
       ...req.body,
-      img: `${url}/${req.file.path}`,
+      img: `${url}/${req.file.path}`,user:req.user._id
     });
     await newproduct.save();
     res.send({ msg: "product added successfuly" });

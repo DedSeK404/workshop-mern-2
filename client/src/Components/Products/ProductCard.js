@@ -28,7 +28,22 @@ export default function ProductCard({ prd }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Link to={`/${prd._id}`}><Button size="small">See Details</Button></Link>
+        <Link to={`/${prd._id}`}>
+          <Button size="small">See Details</Button>
+        </Link>
+        {currentUser?.role == "seller" && currentUser?._id == prd.user && (
+          <div
+            style={{ display: "flex", justifyContent: "end", width: "100%" }}
+          >
+            <Link to="/edit">
+              <Button size="small">edit</Button>
+            </Link>
+            <Button style={{ color: "red" }} size="small">
+              delete
+            </Button>
+          </div>
+        )}
+
         {currentUser?.role == "admin" && (
           <div
             style={{ display: "flex", justifyContent: "end", width: "100%" }}

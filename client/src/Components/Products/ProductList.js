@@ -16,7 +16,7 @@ const ProductList = () => {
   // console.log(products)
   const currentUser=useSelector(state=> state.auth.currentUser)
   return (
-    <>{currentUser?.role=="admin"&&<Link to='/add'>
+    <>{currentUser?.role=="admin"||currentUser?.role=="seller"&&<Link to='/add'>
    
     <Typography  textAlign="center">Add product</Typography>
 

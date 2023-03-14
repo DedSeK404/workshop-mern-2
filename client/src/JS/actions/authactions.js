@@ -46,11 +46,13 @@ export const login = (user, navigate) => async (dispatch) => {
     if (data.msg) {
       alert(data.msg);
     }
-    data.user.role == "admin"
-      ? navigate("/admin_dashboard")
-      : data.user.role == "seller"
-      ? navigate("/seller_dashboard")
-      : navigate("/client_dashboard");
+    if (data.user.role == "admin") {
+     return navigate("/admin_dashboard")
+    }
+    if ( data.user.role == "seller") {
+    return  navigate("/seller_dashboard")
+    }
+    navigate("/client_dashboard");
   } catch (error) {
     dispatch({ type: AUTHFAILED, payload: error });
     console.log(error);

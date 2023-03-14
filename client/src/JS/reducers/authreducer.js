@@ -12,7 +12,7 @@ const initialState = {
   error: null,
   Alert: "",
   currentUser: {},
-  isAuth:false,
+  isAuth: false,
 };
 
 export const authreducer = (state = initialState, { type, payload }) => {
@@ -30,14 +30,13 @@ export const authreducer = (state = initialState, { type, payload }) => {
         Alert: payload.msg,
         currentUser: payload.user,
         authloading: false,
-        isAuth:true
-
+        isAuth: true,
       };
 
     case CURRENTUSERAUTH:
       return {
         ...state,
-isAuth:true,
+        isAuth: true,
         currentUser: payload,
         authloading: false,
       };
@@ -48,7 +47,8 @@ isAuth:true,
         loading: true,
         error: null,
         Alert: null,
-        currentUser: {},isAuth:false,
+        currentUser: {},
+        isAuth: false,
       };
     case AUTHFAILED:
       return { ...state, error: payload, authloading: false };

@@ -3,10 +3,14 @@ const {
   getallproducts,
   getoneprod,
   deleteprod,
-  updateprod,addProduct
+  updateprod,
+  addProduct,
 } = require("../controllers/productControllers");
 
-const isAdmin = require("../middlewares/authorization/IsAdmin");
+const {
+  isAdmin,
+  isAuthorized,
+} = require("../middlewares/authorization/IsAdmin");
 const IsAuth = require("../middlewares/authorization/IsAuth");
 const {
   validator,
@@ -18,14 +22,14 @@ const router = express.Router();
 /**
  * @route POST /product/add
  * @description add new product
- * @access protected
+ * @access protected(authentifié+role:admin/seller)
  */
 router.post(
   "/add",
   IsAuth(),
-  isAdmin,
-//   AddProductRules,
-//   validator,
+  isAuthorized,
+  //   AddProductRules,
+  //   validator,
   upload("products").single("image"),
   addProduct
 );

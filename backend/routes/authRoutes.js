@@ -1,6 +1,6 @@
 const express = require("express");
 const { register, loginuser, getCurrentUser, getAllUsers } = require("../controllers/authControllers");
-const isAdmin = require("../middlewares/authorization/IsAdmin");
+const {isAdmin} = require("../middlewares/authorization/IsAdmin");
 const IsAuth = require("../middlewares/authorization/IsAuth");
 const {
   registerRules,
